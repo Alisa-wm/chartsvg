@@ -1,3 +1,10 @@
+# app_simple.R - 使用基础图形，无需svglite
+library(shiny)
+ui <- fluidPage(
+  # 这个UI几乎为空，因为我们不打算通过浏览器看网页，只通过API拿图片
+  # 但Shiny需要一个输出元素
+  imageOutput("plot_image")
+)
 server <- function(input, output, session) {
   # 定义一个直接生成PNG二进制流的响应函数
   output$plot_image <- renderImage({
@@ -43,3 +50,4 @@ server <- function(input, output, session) {
          alt = "Dynamic Chart")
   }, deleteFile = TRUE) # deleteFile=TRUE 表示请求结束后删除临时文件
 }
+shinyApp(ui, server)
